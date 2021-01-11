@@ -14,7 +14,7 @@
 <body id="app">
     <h1>Interactive Coronavirus Map</h1>
     <p class="credit"><em>Data API from https://covidtracking.com/data/api, taken directly from the websites of state/territory public health authorities.</em></p>
-    <p>This visualization project was built by Josiah Sprankle. | <a href="https://github.com/jspranklemusic/Coronavirus-Interactive-Map-USA-">Github available here.</a></p>
+    <p class="credit">This visualization project was built by Josiah Sprankle. | <a href="https://github.com/jspranklemusic/Coronavirus-Interactive-Map-USA-">Github available here.</a></p>
     <h2 class="loadingfade" v-if="loading">Loading data... ({{completionPercentage}}% completed)</h2>
    <div v-if="!loading">
       <h2>Total Cases: <span class="mark-grey">{{Number(allCases).toLocaleString()}}</span> </h2>
