@@ -14,6 +14,8 @@
 
         html{
            scroll-behavior: smooth;
+           touch-action: manipulation;
+           -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); 
         }
         .loadingfade{
             animation:loadingfade 1s linear infinite;
