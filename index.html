@@ -17,7 +17,9 @@
     <h2 class="loadingfade" v-if="loading">Loading data... ({{completionPercentage}}% completed)</h2>
    <div v-if="!loading">
       <h2>Total Cases: <span class="mark-grey">{{Number(allCases).toLocaleString()}}</span> </h2>
+      <h2>Total Deaths: <span class="mark-grey">{{Number(allDeaths).toLocaleString()}}</span> </h2>
       <h2>New Daily Cases: <span class="mark-grey">{{Number(dailyCases).toLocaleString()}}</span> </h2>
+      <h2>New Daily Deaths: <span class="mark-grey">{{Number(dailyDeaths).toLocaleString()}}</span> </h2>
    </div>
     
     

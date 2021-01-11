@@ -6,7 +6,7 @@ const app = Vue.createApp({
             sliceRange:[0, 56],
             loading:true,
             bytes:0,
-            selectedState:"",
+            selectedState:"CA",
             windowWidth:window.innerWidth,
             currentColor:'red',
             selectedOption:'dailyCases',
@@ -67,10 +67,6 @@ const app = Vue.createApp({
             })
             return cases
         },
-        stateData(){
-            let ind = this.selectedData.findIndex(state=>state.state==this.selectedState)
-            return this.selectedData[ind]
-        },
         allCases(){
             let cases=0
             this.selectedData.forEach(state=>{
@@ -78,6 +74,25 @@ const app = Vue.createApp({
             })
             return cases
         },
+        dailyDeaths(){
+            let deaths=0
+            this.selectedData.forEach(state=>{
+                deaths+=state.deathIncrease
+            })
+            return deaths
+        },
+        allDeaths(){
+            let deaths=0
+            this.selectedData.forEach(state=>{
+                deaths+=state.death
+            })
+            return deaths
+        },
+        stateData(){
+            let ind = this.selectedData.findIndex(state=>state.state==this.selectedState)
+            return this.selectedData[ind]
+        },
+        
         completionPercentage(){
             let perc = this.bytes/230000
             if(perc>100){
