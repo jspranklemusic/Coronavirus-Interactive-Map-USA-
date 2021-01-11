@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
     <title>USA Map</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
     <script src="https://unpkg.com/vue@next"></script>
 
     
@@ -495,6 +496,14 @@
                <div @click="selectedOption='dailyCases';currentColor='red'" :class="{selectedOption:selectedOption=='dailyCases'}">Daily Cases</div>
                <div @click="selectedOption='dailyDeaths';currentColor='black'" :class="{selectedOption:selectedOption=='dailyDeaths'}">Daily Deaths</div>
             </div>
+            <div class="zoom-in-out-bar">
+               <span  class="zoom-icon">
+                  <i @click="zoomIn" class="fas fa-search-plus"></i>
+               </span>
+               <span class="zoom-icon">
+                  <i @click="zoomOut"  class="fas fa-search-minus"></i>
+               </span>
+            </div>
             <div class="absolute-grid-left">
                <div class="relative-grid-wrapper">
                   <div class="number-top">{{descriptor1[0]+descriptor1[1]}}</div>
@@ -508,7 +517,7 @@
             v-for="line in selectedDataPerState"
             class="line"
             :style="{
-               height:selectedOption=='totalCases' ? line.positive/8500+'px' : selectedOption=='totalDeaths' ? line.death/115+'px' : selectedOption == 'dailyCases' ? line.positiveIncrease/200 + 'px' : line.deathIncrease/2.05 + 'px'
+               height:selectedOption=='totalCases' ? line.positive/lineRatios.totalCases+'px' : selectedOption=='totalDeaths' ? line.death/lineRatios.totalDeaths+'px' : selectedOption == 'dailyCases' ? line.positiveIncrease/lineRatios.dailyCases + 'px' : line.deathIncrease/lineRatios.dailyDeaths + 'px'
             }"
             >
             </span>

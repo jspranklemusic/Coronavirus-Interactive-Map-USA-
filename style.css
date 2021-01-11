@@ -52,6 +52,23 @@
             align-items:center ;
             justify-content: center;
         }
+        .zoom-in-out-bar{
+           position: absolute;
+           width:100%;
+           height:auto;
+           top:3rem;
+           display:flex;
+           flex-direction: row;
+           justify-content: center;
+           align-content: center;
+          
+        }
+        .zoom-icon{
+           font-size:2rem;
+           color:rgb(27, 27, 27);
+           margin:0.5rem;
+           cursor:pointer;
+        }
         .flex{
             margin:0.5rem;
         }

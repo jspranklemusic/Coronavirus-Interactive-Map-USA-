@@ -10,6 +10,25 @@ const app = Vue.createApp({
             windowWidth:window.innerWidth,
             currentColor:'red',
             selectedOption:'dailyCases',
+
+            descriptors:{
+                dailyCases:70,
+                totalCases:3,
+                dailyDeaths:700,
+                totalDeaths:40,
+            },
+            ratios:{
+                dailyCases:10000,
+                totalCases:900000,
+                dailyDeaths:400,
+                totalDeaths:20000,
+            },
+            lineRatios:{
+                dailyCases:200,
+                totalCases:8500,
+                dailyDeaths:2.05,
+                totalDeaths:115,
+            }
         }
     },
     computed:{
@@ -21,10 +40,11 @@ const app = Vue.createApp({
             return arr
         },
         descriptor1(){
-            if(this.selectedOption == 'dailyCases') return [70,'k']
-            if(this.selectedOption == 'totalCases') return [3,' mil']
-            if(this.selectedOption == 'dailyDeaths') return [700, ""]
-            if(this.selectedOption == 'totalDeaths') return [40,'k']
+            let d = this.descriptors
+            if(this.selectedOption == 'dailyCases') return [d.dailyCases,'k']
+            if(this.selectedOption == 'totalCases') return [d.totalCases,' mil']
+            if(this.selectedOption == 'dailyDeaths') return [d.dailyDeaths, ""]
+            if(this.selectedOption == 'totalDeaths') return [d.totalDeaths,'k']
         },
         descriptor2(){
             let s = [...this.descriptor1]
@@ -110,8 +130,25 @@ const app = Vue.createApp({
         }
     },
     methods:{
+        zoomOut(){
+                for(let key in this.lineRatios){
+                    this.lineRatios[key]=this.lineRatios[key]*2
+                }
+                for(let key in this.descriptors){
+                    this.descriptors[key]=this.descriptors[key]/2
+                }
+     
+        },
+        zoomIn(){
+                for(let key in this.lineRatios){
+                    this.lineRatios[key]=this.lineRatios[key]/2
+                }
+                for(let key in this.descriptors){
+                    this.descriptors[key]=this.descriptors[key]*2
+                }   
+        },
         colorMap(color){
-            
+            let r = this.ratios
             document.querySelectorAll('path').forEach(path=>{
                 let s = path.style
                 //compare states on the ID map with fetched data
@@ -121,16 +158,16 @@ const app = Vue.createApp({
                 let minRatio = 0.001
                 
 
-                let ratio = this.selectedData[ind].positiveIncrease/10000
+                let ratio = this.selectedData[ind].positiveIncrease/r.dailyCases
 
                 if(this.selectedOption=='totalDeaths') {
-                    ratio = this.selectedData[ind].death/20000
+                    ratio = this.selectedData[ind].death/r.totalDeaths
                 }
                 if(this.selectedOption=='totalCases') {
-                    ratio = this.selectedData[ind].positive/900000
+                    ratio = this.selectedData[ind].positive/r.totalCases
                 }
                 if(this.selectedOption=='dailyDeaths') {
-                    ratio = this.selectedData[ind].deathIncrease/400
+                    ratio = this.selectedData[ind].deathIncrease/r.dailyDeaths
                 }
                 
 
@@ -160,6 +197,9 @@ const app = Vue.createApp({
         },
         sortByCases(){
             return this.selectedData.sort((a,b)=>a.positiveIncrease<b.positiveIncrease)
+        },
+        zoom(){
+
         }
     },
     async mounted(){
@@ -252,28 +292,4 @@ const app = Vue.createApp({
 
 app.mount("#app")
 
-   // path.addEventListener('click',()=>{
-            //     let hlight = path.getAttribute('highlighted')
-            //     if(hlight=='false') {
-            //         s.fill="red"
-            //         path.setAttribute('highlighted',true)
-            //     }
-            //     else{ 
-            //         s.fill='#f9f9f9'
-            //         path.setAttribute('highlighted',false)
-            //     }
-                
-            // })
-            // path.addEventListener('mouseenter',()=>{
-            //     let hlight = path.getAttribute('highlighted')
-            //     s.fill='rgba(255, 0, 0, 0.205)'
-            // })
-            // path.addEventListener('mouseout',()=>{
-            //     let hlight = path.getAttribute('highlighted')
-            //     if(hlight=='false'){
-            //         s.fill='#f9f9f9'
-            //     }else{
-            //         s.fill="red"
-            //     }
-                
-            // })
+   
