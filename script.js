@@ -135,13 +135,13 @@ const app = Vue.createApp({
                     this.lineRatios[key]=this.lineRatios[key]*2
                 }
                 for(let key in this.descriptors){
-                    this.descriptors[key]=this.descriptors[key]/2
+                    this.descriptors[key]=this.descriptors[key]*2
                 }
      
         },
         zoomIn(){
                 for(let key in this.lineRatios){
-                    this.lineRatios[key]=this.lineRatios[key]/2
+                    this.lineRatios[key]=this.lineRatios[key]*2
                 }
                 for(let key in this.descriptors){
                     this.descriptors[key]=this.descriptors[key]*2
